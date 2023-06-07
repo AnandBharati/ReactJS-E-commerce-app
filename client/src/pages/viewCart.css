@@ -1,0 +1,49 @@
+.cartContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.cartContainer .items{
+    margin-bottom: 30px;
+}
+
+.cartContainer .item{
+    display: flex;
+    width: 500px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px 0;
+    position: relative;
+}
+
+.cartContainer .item p, .cartContainer .item h4{
+    margin-bottom: 4px;
+}
+
+.cartContainer img{
+    width: 150px;
+    height: 150px;
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+.remove{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+button{
+    padding: 5px 10px;
+    font-size: 1rem;
+    background-color: #dc143c;
+    margin-top: 5px;
+}
+
+button:active{
+    background-color: #dc143cdd;
+}

@@ -1,0 +1,73 @@
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex: 1 1;
+    gap: 40px;
+    margin: 30px 0  ;
+}
+
+.card {
+    width: 208px;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 8px 8px 10px 0 #d5d5d5,
+        -4px 4px 4px 0 #d5d5d5;
+    /* border: 2px solid crimson; */
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px 8px 0 0;
+    object-fit: cover;
+    /* aspect-ratio: 1/1; */
+    border: none;
+}
+
+.card .caption {
+    padding: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: #292f36;
+}
+
+.btns {
+    margin-top: 10px;
+}
+
+/*default button style*/
+button {
+    border: none;
+    outline: none;
+    background-color: #292f36;
+    color: #d5d5d5;
+    border-radius: 4px;
+}
+
+/*+ - button styling */
+.btns button,
+.btnAddtocart {
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 0;
+}
+
+/*add to cart button styling*/
+.btnAddtocart {
+    width: fit-content;
+    padding: 0 10px;
+    margin-top: 10px;
+    margin-left: 0;
+    text-transform: uppercase;
+    align-self: flex-end;
+    justify-self: end;
+}
+
+.btns input {
+    width: 40px;
+    height: 30px;
+}
