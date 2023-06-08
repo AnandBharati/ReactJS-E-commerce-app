@@ -14,7 +14,7 @@ db.then(() => console.log('connection successful'))
     .catch((e) => console.log('error', e))
 
 
-app.listen(2000)
+app.listen(process.env.PORT || 2000)
 app.get('/', (req, res) => {
     res.status(200).json({ msg: 'working' })
 })

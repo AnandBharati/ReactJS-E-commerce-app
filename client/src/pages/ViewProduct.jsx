@@ -14,9 +14,17 @@ function ViewProduct() {
   }, [products])
 
   return (
-    <div>
-      <h1>id - {item[0].id}</h1>
-      <h1>name - {item[0].name}</h1>
+    <div className='view-product'>
+      <h2>{item.id}</h2>
+      <img src={item.image} alt="product image" />
+
+      <div className="product-detail">
+        <p>name - {item[0].name}</p>
+        <p>{item[0].desc}</p>
+        <p>Seller - {item[0].seller}</p>
+        <p>Manifactured By - {item[0].manifacturedBy}</p>
+        <h3>{item.price}</h3>
+      </div>
     </div>
 
   )
