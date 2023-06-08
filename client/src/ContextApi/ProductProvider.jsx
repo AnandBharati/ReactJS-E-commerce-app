@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ProductContext } from './ProductContext'
 
+
 export function PRODUCTS() {
     const productContext = useContext(ProductContext);
     return productContext;
@@ -10,14 +11,14 @@ function ProductProvider(props) {
     const [products, setProducts] = useState([])
 
     useEffect(()=>{
-        fetch('http://localhost:2000/product/all')
+        fetch(`${import.meta.env.VITE_BASEURL}/product/all`)
         .then((res)=>res.json())
         .then((result)=> setProducts(result))
     }, [])
 
     function addProduct(item) {
         setProducts([...products, item]);
-        fetch('http://localhost:2000/product/add',{
+        fetch(`${import.meta.env.VITE_BASEURL}/product/add`,{
             method: 'POST',
             headers:{
                 "Content-Type": "application/json",

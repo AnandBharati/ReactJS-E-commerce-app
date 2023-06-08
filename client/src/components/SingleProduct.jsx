@@ -18,7 +18,7 @@ function SingleProduct({ ProdId }) {
     // console.log(cart)
     return (
         <div className="card" >
-            <img src={image} height={200} width={200} />
+            <img src={image} height={200} width={200} loading='lazy'/>
             <div className="caption">
                 <NavLink to={"/viewproduct/" + id}>
                     <div className="name">{name}</div>
