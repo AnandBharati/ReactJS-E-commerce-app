@@ -6,7 +6,7 @@ import {
 	NavMenu,
 	NavBtn,
 	NavBtnLink,
-} from './NavbarElements';
+} from './NavbarElements-obsolete';
 import { BsFillCartCheckFill } from 'react-icons/bs';
 import { CART } from '../ContextApi/CartProvider';
 

@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 
 function SingleProduct({ ProdId }) {
     const { products } = PRODUCTS();
-    const { cart, addToCart, removeFromCart, IncQty, DecQty } = CART();
+    const { cart, addToCart, IncQty, DecQty } = CART();
     const [SingleProduct, setSingleProduct] = useState(...products.filter(p => p.id === ProdId))
     const { id, name, desc,price, image } = SingleProduct;
 
@@ -23,7 +23,7 @@ function SingleProduct({ ProdId }) {
                 <NavLink to={"/viewproduct/" + id}>
                     <div className="name">{name}</div>
                     <div className="desc">{desc}</div>
-                    <div className="price">$ {price}</div>
+                    <div className="price"> <b>₹{price.toLocaleString()}</b></div>
                 </NavLink>
                 {cartDetail.length > 0 ?
                     <div className="btns" style={{ display: 'flex' }}>

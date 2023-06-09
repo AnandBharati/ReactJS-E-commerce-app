@@ -25,7 +25,7 @@ function ViewCart() {
                                 <input type="text" readOnly value={item.qty} />
                                 <button onClick={() => IncQty(item.id)}>+</button>
                             </div>
-                            <p>price: {item.totalprice} </p>
+                            <p>price: ₹{item.totalprice.toLocaleString()} </p>
                         </div>
                         <div className="remove" onClick={() => removeFromCart(item.id)}>
                             <IconContext.Provider value={{ style: { verticalAlign: 'middle', fontSize: '25px' } }}>
@@ -36,7 +36,7 @@ function ViewCart() {
                 )}
             </div>
 
-            <h1>Total: {cart.reduce((prev, now) => prev + now.totalprice, 0)}</h1>
+            <h1>Total: ₹{cart.reduce((prev, now) => prev + now.totalprice, 0).toLocaleString()}</h1>
             <button type='button'>Checkout</button>
 
         </div>

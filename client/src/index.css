@@ -15,9 +15,8 @@ body{
   overflow-x: hidden;
   /* align-items: center; */
 }
-/* 
-#root{
-  max-width: 800px;
-  background-color: aqua;
 
-} */
+#root{
+  width: 100%;
+  /* background-color: aqua; */
+}

@@ -40,10 +40,12 @@
 button{
     padding: 5px 10px;
     font-size: 1rem;
-    background-color: #dc143c;
+    /* background-color: #dc143c; */
+    background-color: #1976d2;
     margin-top: 5px;
 }
 
 button:active{
-    background-color: #dc143cdd;
+    background-color: #2085eb;
+    /* background-color: #dc143cdd; */
 }

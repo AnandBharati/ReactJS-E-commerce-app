@@ -1,0 +1,15 @@
+.view-product {
+    /* box-shadow: 0 0 10px 0 #ddd; */
+    /* margin: 20px 0; */
+
+    padding: 20px 20px 40px 20px;
+    width: 100%;
+    display: flex;
+    gap: 30px;
+}
+
+.view-product img{
+    width: 300px;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+}

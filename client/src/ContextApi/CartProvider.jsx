@@ -15,8 +15,7 @@ function CartProvider({ children }) {
     [{id, qty, name, desc, image}]
     */
 
-    function addToCart(ProdId) {
-        console.log('inside addtocart function')
+    function addToCart(ProdId) {        
         //check if product already added
         if (!cart.includes(p => p.id === ProdId)) {
             const product = products.filter((prod) => prod.id === ProdId)

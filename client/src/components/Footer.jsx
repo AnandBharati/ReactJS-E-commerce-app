@@ -1,78 +1,77 @@
-import React from "react";
-import {
-Box,
-Container,
-Row,
-Column,
-FooterLink,
-Heading,
-} from "./FooterStyles";
+import * as React from "react";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import { Facebook, Instagram, Twitter } from "@mui/icons-material";
+import { Box } from "@mui/material";
 
-const Footer = () => {
-return (
-	<Box>
-	<h1 style={{ color: "green",
-				textAlign: "center",
-				marginTop: "-50px",
-        marginBottom: '20px' }}>
-		E-commerce website sample
-	</h1>
-	<Container>
-		<Row>
-		<Column>
-			<Heading>About Us</Heading>
-			<FooterLink href="#">Aim</FooterLink>
-			<FooterLink href="#">Vision</FooterLink>
-			<FooterLink href="#">Testimonials</FooterLink>
-		</Column>
-		<Column>
-			<Heading>Services</Heading>
-			<FooterLink href="#">Writing</FooterLink>
-			<FooterLink href="#">Internships</FooterLink>
-			<FooterLink href="#">Coding</FooterLink>
-			<FooterLink href="#">Teaching</FooterLink>
-		</Column>
-		<Column>
-			<Heading>Contact Us</Heading>
-			<FooterLink href="#">Uttar Pradesh</FooterLink>
-			<FooterLink href="#">Ahemdabad</FooterLink>
-			<FooterLink href="#">Indore</FooterLink>
-			<FooterLink href="#">Mumbai</FooterLink>
-		</Column>
-		<Column>
-			<Heading>Social Media</Heading>
-			<FooterLink href="#">
-			<i className="fab fa-facebook-f">
-				<span style={{ marginLeft: "10px" }}>
-				Facebook
-				</span>
-			</i>
-			</FooterLink>
-			<FooterLink href="#">
-			<i className="fab fa-instagram">
-				<span style={{ marginLeft: "10px" }}>
-				Instagram
-				</span>
-			</i>
-			</FooterLink>
-			<FooterLink href="#">
-			<i className="fab fa-twitter">
-				<span style={{ marginLeft: "10px" }}>
-				Twitter
-				</span>
-			</i>
-			</FooterLink>
-			<FooterLink href="#">
-			<i className="fab fa-youtube">
-				<span style={{ marginLeft: "10px" }}>
-				Youtube
-				</span>
-			</i>
-			</FooterLink>
-		</Column>
-		</Row>
-	</Container>
-	</Box>
-);
-};
-export default Footer;
+export default function Footer() {
+  return (
+    <Box
+      component="footer"
+      sx={{
+        backgroundColor: (theme) =>
+          theme.palette.mode === "light"
+            ? theme.palette.grey[200]
+            : theme.palette.grey[800],
+        p: 6,
+      }}
+    >
+      <Container maxWidth="lg">
+        <Grid container spacing={5}>
+          <Grid item xs={12} sm={4}>
+            <Typography variant="h6" color="text.primary" gutterBottom>
+              About Us
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              We are XYZ company, dedicated to providing the best service to our
+              customers.
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Typography variant="h6" color="text.primary" gutterBottom>
+              Contact Us
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              123 Main Street, Anytown, USA
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Email: info@example.com
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Phone: +1 234 567 8901
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Typography variant="h6" color="text.primary" gutterBottom>
+              Follow Us
+            </Typography>
+            <Link href="https://www.facebook.com/" color="inherit">
+              <Facebook />
+            </Link>
+            <Link
+              href="https://www.instagram.com/"
+              color="inherit"
+              sx={{ pl: 1, pr: 1 }}
+            >
+              <Instagram />
+            </Link>
+            <Link href="https://www.twitter.com/" color="inherit">
+              <Twitter />
+            </Link>
+          </Grid>
+        </Grid>
+        <Box mt={5}>
+          <Typography variant="body2" color="text.secondary" align="center">
+            {"Copyright © "}
+            <Link color="inherit" href="https://your-website.com/">
+              Your Website
+            </Link>
+            {new Date().getFullYear()}
+          </Typography>
+        </Box>
+      </Container>
+    </Box>
+  );
+}
