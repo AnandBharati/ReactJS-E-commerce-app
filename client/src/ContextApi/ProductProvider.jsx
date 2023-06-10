@@ -11,14 +11,14 @@ function ProductProvider(props) {
     const [products, setProducts] = useState([])
 
     useEffect(()=>{
-        fetch(`${import.meta.env.VITE_BASEURL}/product/all`)
+        fetch(`${process.env.VITE_BASEURL}/product/all`)
         .then((res)=>res.json())
         .then((result)=> setProducts(result))
     }, [])
 
     function addProduct(item) {
         setProducts([...products, item]);
-        fetch(`${import.meta.env.VITE_BASEURL}/product/add`,{
+        fetch(`${process.env.VITE_BASEURL}/product/add`,{
             method: 'POST',
             headers:{
                 "Content-Type": "application/json",
