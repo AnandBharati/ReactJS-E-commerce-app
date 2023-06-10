@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { CardContext } from './CartContext'
 import { PRODUCTS } from './ProductProvider';
 
@@ -14,8 +14,18 @@ function CartProvider({ children }) {
     /*
     [{id, qty, name, desc, image}]
     */
+    useEffect(() => {
+        const localCartValue = localStorage.getItem('cart')
+        localCartValue && setCart(JSON.parse(localCartValue));
+        console.log(localCartValue)
+        
+    },[])
 
-    function addToCart(ProdId) {        
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }, [cart])
+
+    function addToCart(ProdId) {
         //check if product already added
         if (!cart.includes(p => p.id === ProdId)) {
             const product = products.filter((prod) => prod.id === ProdId)

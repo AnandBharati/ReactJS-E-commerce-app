@@ -18,8 +18,8 @@ function App() {
       <Box>
         <Routes>
           <Route path='/' element={<Layout />}>
-            {/* <Route index element={<Homepage />} /> */}
-            <Route index element={<Products />} />
+            <Route index element={<Homepage />} />
+            {/* <Route index element={<Products />} /> */}
             <Route path='products' element={<Products />} />
             <Route path='addnewproduct' element={<AddNewProduct />} />
             <Route path='viewproduct/:id' element={<ViewProduct />} />
