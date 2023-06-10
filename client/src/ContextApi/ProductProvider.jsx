@@ -11,14 +11,14 @@ function ProductProvider(props) {
     const [products, setProducts] = useState([])
 
     useEffect(()=>{
-        fetch(`${process.env.VITE_BASEURL}/product/all`)
+        fetch(`https://kind-rose-earthworm-hose.cyclic.app/product/all`)
         .then((res)=>res.json())
         .then((result)=> setProducts(result))
     }, [])
 
     function addProduct(item) {
         setProducts([...products, item]);
-        fetch(`${process.env.VITE_BASEURL}/product/add`,{
+        fetch(`https://kind-rose-earthworm-hose.cyclic.app/product/add`,{
             method: 'POST',
             headers:{
                 "Content-Type": "application/json",
