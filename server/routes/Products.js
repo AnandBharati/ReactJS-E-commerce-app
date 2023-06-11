@@ -58,9 +58,9 @@ router.get('/:id', async (req, res) => {
 })
 
 router.get('/search/:keyword', async (req, res) => {
-    const keyword = req.params.keyword;
+    const keyword = req.params.keyword.toUpperCase();
     const result = await productModel.find({})
-    const filtered = result.filter((item) => item.name.search(keyword)>0)
+    const filtered = result.filter((item) => item.name.toUpperCase().search(keyword)>=0)
     res.status(200).json(filtered)
 })
 

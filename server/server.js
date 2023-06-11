@@ -3,6 +3,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import authRouter from './routes/Auth.js'
 import productRouter from './routes/Products.js'
+import userRouter from './routes/User.js'
 
 
 const app = express()
@@ -20,4 +21,5 @@ app.get('/', (req, res) => {
 })
 
 app.use('/auth', authRouter)
+app.use('/user', userRouter)
 app.use('/product', productRouter)

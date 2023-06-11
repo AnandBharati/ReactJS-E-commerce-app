@@ -1,0 +1,7 @@
+get http://localhost:2000/
+content-type: application/json
+
+{
+    "username": "Anand",
+    "password": "Anand"
+}

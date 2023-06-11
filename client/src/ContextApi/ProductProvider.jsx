@@ -11,10 +11,14 @@ function ProductProvider(props) {
     const [products, setProducts] = useState([])
 
     useEffect(()=>{
+        fetchProducts()
+    }, [])
+
+    function fetchProducts(){
         fetch(`https://kind-rose-earthworm-hose.cyclic.app/product/all`)
         .then((res)=>res.json())
         .then((result)=> setProducts(result))
-    }, [])
+    }
 
     function addProduct(item) {
         setProducts([...products, item]);
@@ -30,7 +34,7 @@ function ProductProvider(props) {
     }
 
     return (
-        <ProductContext.Provider value={{ products, addProduct }}>
+        <ProductContext.Provider value={{ products, setProducts, addProduct, fetchProducts }}>
             {props.children}
         </ProductContext.Provider>
     )

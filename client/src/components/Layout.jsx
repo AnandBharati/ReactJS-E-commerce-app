@@ -9,7 +9,7 @@ function Layout() {
   return (
     <Box padding={0} margin={0} sx={{width: '100vw'}}>
         {/* <NavBar/> */}
-        <ResponsiveAppBar/>
+        <ResponsiveAppBar/>       
         <MainPage />
         <Footer/>
     </Box>
