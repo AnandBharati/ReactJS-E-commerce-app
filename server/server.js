@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import authRouter from './routes/Auth.js'
 import productRouter from './routes/Products.js'
 import userRouter from './routes/User.js'
+import fetch from 'node-fetch'
 
 
 const app = express()
@@ -20,6 +21,22 @@ app.get('/', (req, res) => {
     res.status(200).json({ msg: 'working' })
 })
 
+
+
+app.get('*', async (req, res, next) => {
+    console.log('inside *');
+    const error = new Error("invalid route");
+    error.statusCode = 404;
+    next(error);
+})
+
 app.use('/auth', authRouter)
 app.use('/user', userRouter)
 app.use('/product', productRouter)
+
+
+app.use((error, req, res, next) => {
+    console.log("inside middleware")
+    error.status = 404
+    return res.status(error.status).json({success: false , error: error.message, name: error.name, })
+})

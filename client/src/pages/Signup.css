@@ -1,0 +1,26 @@
+
+.signup-container{
+    background-color: #111111ff;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    overflow: hidden;
+}
+
+.signup-container input[type='submit']{
+    padding: 10px;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.signup-container form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-container input{
+    width: 300px;
+}

@@ -17,6 +17,8 @@ import { BsFillCartCheckFill } from 'react-icons/bs';
 import { CART } from '../ContextApi/CartProvider';
 
 import logo from '../assets/logo.png'
+import { MODEL } from '../ContextApi/ModelProvider';
+import { USERS } from '../ContextApi/UserProvider';
 const pages = [['Explore', '/products']]
 // const pages = [['Products', '/products'], ['Add Product', '/addnewproduct'], ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -24,6 +26,8 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const { isloggedin, setIsloggedin } = USERS()
+    const { setIsSignupOpen, setIsLoginOpen } = MODEL()
 
     const { cart } = CART()
 
@@ -43,10 +47,10 @@ function ResponsiveAppBar() {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" >
             <Container maxWidth={'xl'}>
-                <Toolbar disableGutters>
-                    <img src={logo} height='80px' />
+                <Toolbar disableGutters style={{ height: '50px' }} >
+                    <img src={logo} height='50px' />
                     {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
                     <Typography
                         variant="h6"
@@ -141,7 +145,7 @@ function ResponsiveAppBar() {
                     </Box>
 
 
-                 {/* cart */}
+                    {/* cart */}
                     <NavLink to='/viewCart' style={{ position: 'relative' }}>
                         <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}  >
                             {cart.length > 0 && <h4 className='cart-item-count' style={{ position: 'absolute', top: -5, right: 10, color: 'white', fontSize: '1rem' }}>{cart.length}</h4>}
@@ -149,7 +153,18 @@ function ResponsiveAppBar() {
                         </Button>
                     </NavLink>
 
-                {/* profile */}
+                    {/*sign up and login */}
+                    <Box>
+                        {!isloggedin ? <>
+                            <button type="button" onClick={() => setIsSignupOpen(true)}>signup</button>
+                            <button type="button" onClick={() => setIsLoginOpen(true)}>login</button>
+                        </> :
+                            <button type="button" onClick={() => {setIsloggedin(false); setIsLoginOpen(true)}}>logout</button>
+                        }
+
+                    </Box>
+
+                    {/* profile */}
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

@@ -1,34 +1,99 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { UserContext } from './UserContext'
+
+export function USERS() {
+  const userContext = useContext(UserContext);
+  return userContext;
+}
 
 
-function UserProvider() {
-    const [userProfile, setUserProfile] = useState({
-        username: '',
-        email: '',
-        firstame: '',
-        lastname: '',
-        dob: '',
-        addressline1: '',
-        addressline2: '',
-        city: '',
-        country: '',
-        pincode: '',
-    });
+function UserProvider({ children }) {
+  const [userProfile, setUserProfile] = useState({
+    username: '',
+    email: '',
+    firstame: '',
+    lastname: '',
+    dob: '',
+    addressline1: '',
+    addressline2: '',
+    city: '',
+    country: '',
+    pincode: '',
+  });
+  const [authInfo, setAuthInfo] = useState({})
+  const [isloggedin, setIsloggedin] = useState(false);
 
-    const signup = (user)=>{
-      
-    }
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
-    const signin = ({username, password}) =>{
 
-    }
 
-    const updateUser = (user)=>{
+  const signup = async (user) => {
+    setIsLoading(true);
+    setIsError(false);
+    return fetch('https://kind-rose-earthworm-hose.cyclic.app/auth/signup', {
+      method: 'post',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(user)
+    }).then((res) => res.json())
+      .then((json) => {
+        console.log({json})
+        if (json.success) {
+          setIsLoading(false)
+          setErrorMsg("")
+          setIsError(false)
+          setAuthInfo(json.data)
+        }
+        else {
+          throw new Error(json.error)
+        }
+      }).catch((err) => {
+        setIsLoading(false)
+        setIsError(true)
+        setErrorMsg(err.message)
+      })
+  }
 
-    }
+
+  const login = ({ username, password }) => {
+
+    fetch('https://kind-rose-earthworm-hose.cyclic.app/auth/login', {
+      method: 'post',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({ username, password })
+    })
+      .then((res) => res.json())
+      .then((result) => result.success && setIsloggedin(true))
+      .catch((e) => console.log('error while sign up', e))
+  }
+
+  const updateUser = (user) => {
+    //todo
+  }
+
+
+  const valueToReturn = {
+    userProfile,
+    authInfo,
+    isLoading,
+    isError,
+    errorMsg,
+    isloggedin,
+    signup,
+    login,
+    setErrorMsg,
+    setIsloggedin
+  }
 
   return (
-    <div>UserProvider</div>
+    <UserContext.Provider value={valueToReturn}>
+      {children}
+    </UserContext.Provider>
   )
 }
 

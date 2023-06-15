@@ -1,0 +1,23 @@
+.fullscreen {
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+
+}
+
+.closeBtn {
+    position: fixed;
+    top: 20px;
+    right: 40px;
+    cursor: pointer;
+    color: #fff;
+    z-index: 101;
+}
+
+.mainpage {
+    display: flex;
+    justify-content: center;
+    min-height: calc(100vh - 200px);
+}
