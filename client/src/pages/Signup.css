@@ -13,6 +13,8 @@
     padding: 10px;
     font-size: 1rem;
     text-transform: uppercase;
+    background-color: #0059fff5;
+    color: #222;
 }
 
 .signup-container form{

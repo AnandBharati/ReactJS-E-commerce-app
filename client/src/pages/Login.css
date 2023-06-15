@@ -18,6 +18,8 @@
     text-transform: uppercase;
     width: 300px;
     border-top: 10px;
+    background-color: #0059fff5;
+    color: #222;
 }
 
 .login-container form {
