@@ -23,20 +23,20 @@ app.get('/', (req, res) => {
 
 
 
-app.get('*', async (req, res, next) => {
+
+
+app.use('/auth', authRouter)
+app.use('/user', userRouter)
+app.use('/product', productRouter)
+app.all('*', async (req, res, next) => {
     console.log('inside *');
     const error = new Error("invalid route");
     error.statusCode = 404;
     next(error);
 })
 
-app.use('/auth', authRouter)
-app.use('/user', userRouter)
-app.use('/product', productRouter)
-
-
 app.use((error, req, res, next) => {
     console.log("inside middleware")
     error.status = 404
-    return res.status(error.status).json({success: false , error: error.message, name: error.name, })
+    return res.status(error.status).json({ success: false, error: error.message, name: error.name, })
 })
