@@ -59,7 +59,9 @@ function UserProvider({ children }) {
 
 
   const login = ({ username, password }) => {
-
+    setIsLoading(true);
+    setIsError(false);
+    setErrorMsg("")
     fetch('https://kind-rose-earthworm-hose.cyclic.app/auth/login', {
       method: 'post',
       headers: {
@@ -68,8 +70,15 @@ function UserProvider({ children }) {
       body: JSON.stringify({ username, password })
     })
       .then((res) => res.json())
-      .then((result) => result.success && setIsloggedin(true))
-      .catch((e) => console.log('error while sign up', e))
+      .then((result) =>{ 
+        result.success && setIsloggedin(true)
+        setIsLoading(false);
+      })
+      .catch((e) => {
+        setIsLoading(false);
+        setIsError(true);
+        setErrorMsg(e.message)
+      })
   }
 
   const updateUser = (user) => {

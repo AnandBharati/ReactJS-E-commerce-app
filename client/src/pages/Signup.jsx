@@ -58,7 +58,7 @@ function Signup() {
                     <input type="text" id='cnfmPassword' value={cnfmPassword} onChange={(e) => setCnfmPassword(e.target.value)} />
                 </label>
 
-                <input type="submit" value="SIGN UP" />
+                <input type="submit" value={isLoading ? "Please wait..." :"SIGN UP"} />
             </form>
         </div>
     )

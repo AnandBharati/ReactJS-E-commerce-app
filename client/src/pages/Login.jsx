@@ -43,7 +43,7 @@ function Login() {
           <input type="text" id='password' value={loginDetail.password} onChange={(e) => setLoginDetail({ ...loginDetail, password: e.target.value })} />
         </label>
 
-        <input type="submit" value="Login" />
+        <input type="submit" value={isLoading ? "Please wait..." : "Login"} />
       </form>
 
     </div>
