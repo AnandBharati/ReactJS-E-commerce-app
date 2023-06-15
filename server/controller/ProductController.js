@@ -23,8 +23,12 @@ export const addProduct = async (req, res) => {
 }
 
 export const fetchAllproduct = async (req, res) => {
-    const result = await productModel.find({})
-    res.status(200).json(result);
+    try {
+        const result = await productModel.find({})
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(400).json("error occured", error.stackTrack)
+    }
 }
 
 export const fetchProductsByCategory = async (req, res) => {
