@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { MODEL } from '../ContextApi/ModelProvider'
-import './login.css'
+import './Login.css'
 import { USERS } from '../ContextApi/UserProvider';
 
 function Login() {
