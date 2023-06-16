@@ -8,7 +8,7 @@ function SingleProduct({ ProdId }) {
     const { products } = PRODUCTS();
     const { cart, addToCart, IncQty, DecQty } = CART();
     const [SingleProduct, setSingleProduct] = useState(...products.filter(p => p.id === ProdId))
-    const { id, name, desc,price, image } = SingleProduct;
+    const { id, name, desc, price, image } = SingleProduct;
 
     const cartDetail = cart.filter((p) => p?.id === ProdId)
     // useEffect(() => {
@@ -18,13 +18,17 @@ function SingleProduct({ ProdId }) {
     // console.log(cart)
     return (
         <div className="card" >
-            <img src={image} height={200} width={200} loading='lazy'/>
-            <div className="caption">
-                <NavLink to={"/viewproduct/" + id}>
-                    <div className="name">{name}</div>
+            <NavLink to={"/viewproduct/" + id}>
+                <img src={image} height={200} width={200} loading='lazy' />
+                <div className="caption">
+
+                    <div className="title">{name}</div>
                     <div className="desc">{desc}</div>
                     <div className="price"> <b>₹{price.toLocaleString()}</b></div>
-                </NavLink>
+
+                </div>
+            </NavLink>
+            <div className="buttons">
                 {cartDetail.length > 0 ?
                     <div className="btns" style={{ display: 'flex' }}>
                         <button onClick={() => DecQty(ProdId)}>-</button>

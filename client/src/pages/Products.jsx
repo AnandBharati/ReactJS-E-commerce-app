@@ -8,7 +8,7 @@ function Products() {
   const { products } = PRODUCTS();
 
   return (
-    <div>
+    <div className='product-container'>
        <Operations />
       <div className="cards">
         {products.map((prod) =>
