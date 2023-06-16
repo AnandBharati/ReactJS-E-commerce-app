@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import apiUrl from '../helpers/API_URL'
 import { UserContext } from './UserContext'
 
 export function USERS() {
@@ -62,7 +63,7 @@ function UserProvider({ children }) {
     setIsLoading(true);
     setIsError(false);
     setErrorMsg("")
-    fetch('https://kind-rose-earthworm-hose.cyclic.app/auth/login', {
+    fetch(`${apiUrl}/auth/login`, {
       method: 'post',
       headers: {
         'content-type': 'application/json',
