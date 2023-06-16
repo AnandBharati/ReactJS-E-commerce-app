@@ -12,6 +12,12 @@ import { Box, Container } from '@mui/material'
 
 function App() {
 
+  useEffect(() => {
+    window.process = {
+      ...window.process,
+    };
+  }, []);
+
   return (
     <>
       {/* <div className="mainContainer"> */}
