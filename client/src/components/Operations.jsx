@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { PRODUCTS } from '../ContextApi/ProductProvider';
+import apiUrl from '../helpers/API_URL';
 
 function Operations() {
     const [keyword, setKeyword] = useState('');
     const {products, setProducts, fetchProducts} = PRODUCTS()
     
     const searchHandler = ()=>{
-        fetch('http://localhost:2000/product/search/'+keyword)
+        fetch(`${apiUrl}product/search/`+keyword)
         .then((res)=> res.json())
         .then((result)=> setProducts(result))
     }
