@@ -33,7 +33,7 @@ function UserProvider({ children }) {
   const signup = async (user) => {
     setIsLoading(true);
     setIsError(false);
-    return fetch('https://kind-rose-earthworm-hose.cyclic.app/auth/signup', {
+    return fetch(`${apiUrl}/auth/signup`, {
       method: 'post',
       headers: {
         'content-type': 'application/json',

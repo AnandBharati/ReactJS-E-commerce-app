@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ProductContext } from './ProductContext'
+import apiUrl from '../helpers/API_URL'
 
 
 export function PRODUCTS() {
@@ -15,14 +16,14 @@ function ProductProvider(props) {
     }, [])
 
     function fetchProducts(){
-        fetch(`https://kind-rose-earthworm-hose.cyclic.app/product/all`)
+        fetch(`${apiUrl}/product/all`)
         .then((res)=>res.json())
         .then((result)=> setProducts(result))
     }
 
     function addProduct(item) {
         setProducts([...products, item]);
-        fetch(`https://kind-rose-earthworm-hose.cyclic.app/product/add`,{
+        fetch(`${apiUrl}/product/add`,{
             method: 'POST',
             headers:{
                 "Content-Type": "application/json",
