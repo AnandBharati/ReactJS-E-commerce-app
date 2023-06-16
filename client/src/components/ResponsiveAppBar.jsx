@@ -21,7 +21,7 @@ import { MODEL } from '../ContextApi/ModelProvider';
 import { USERS } from '../ContextApi/UserProvider';
 const pages = [['Explore', '/products']]
 // const pages = [['Products', '/products'], ['Add Product', '/addnewproduct'], ];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Account', 'Dashboard'];
 
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -50,7 +50,10 @@ function ResponsiveAppBar() {
         <AppBar position="static" >
             <Container maxWidth={'xl'}>
                 <Toolbar disableGutters style={{ height: '50px' }} >
-                    <img src={logo} height='50px' />
+                    <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+                        <img src={logo} height='50px' />
+                    </Box>
+
                     {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
                     <Typography
                         variant="h6"
@@ -69,6 +72,7 @@ function ResponsiveAppBar() {
                     >
                         e-Commerce
                     </Typography>
+
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
@@ -108,26 +112,12 @@ function ResponsiveAppBar() {
 
                             ))}
                         </Menu>
+                        <Box sx={{ display: { xs: 'block', md: 'none' }, justifySelf: 'start' }}>
+                            <img src={logo} height='50px' />
+                        </Box>
                     </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component="a"
-                        href=""
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        LOGO
-                    </Typography>
+
+
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
                             <NavLink
@@ -154,14 +144,13 @@ function ResponsiveAppBar() {
                     </NavLink>
 
                     {/*sign up and login */}
-                    <Box>
+                    <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                         {!isloggedin ? <>
                             <button type="button" onClick={() => setIsSignupOpen(true)}>signup</button>
                             <button type="button" onClick={() => setIsLoginOpen(true)}>login</button>
                         </> :
-                            <button type="button" onClick={() => {setIsloggedin(false); setIsLoginOpen(true)}}>logout</button>
+                            <button type="button" onClick={() => { setIsloggedin(false); setIsLoginOpen(true) }}>logout</button>
                         }
-
                     </Box>
 
                     {/* profile */}
@@ -192,6 +181,15 @@ function ResponsiveAppBar() {
                                     <Typography textAlign="center">{setting}</Typography>
                                 </MenuItem>
                             ))}
+                            <Box sx={{ display: { xs: 'display', sm: 'none' } }}>
+                                {!isloggedin ? <>
+                                    <MenuItem onClick={() => { handleCloseUserMenu(); setIsSignupOpen(true) }}>Signup</MenuItem>
+                                    <MenuItem onClick={() => { handleCloseUserMenu(); setIsLoginOpen(true) }}>Login</MenuItem>
+                                </> :
+                                    <MenuItem onClick={() => { handleCloseUserMenu(); setIsloggedin(false); setIsLoginOpen(true) }}>Logout</MenuItem>
+                                }
+                            </Box>
+
                         </Menu>
                     </Box>
                 </Toolbar>

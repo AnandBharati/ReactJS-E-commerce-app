@@ -89,6 +89,10 @@ button {
     justify-self: center;
 }
 
+.btns input{
+    margin: 5px 0;
+}
+
 /*add to cart button styling*/
 .btnAddtocart {
     width: fit-content;
