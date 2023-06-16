@@ -7,7 +7,7 @@ function Operations() {
     const {products, setProducts, fetchProducts} = PRODUCTS()
     
     const searchHandler = ()=>{
-        fetch(`${apiUrl}product/search/`+keyword)
+        fetch(`${apiUrl}/product/search/`+keyword)
         .then((res)=> res.json())
         .then((result)=> setProducts(result))
     }
