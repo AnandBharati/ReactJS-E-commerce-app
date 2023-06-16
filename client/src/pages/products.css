@@ -108,6 +108,7 @@ button {
         /* padding: 10px 10px; */
         display: grid;  
         gap: 10px;
+        row-gap: 1rem;
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     }
 
