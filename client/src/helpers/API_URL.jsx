@@ -1,3 +1,6 @@
-const apiUrl = process?.env?.apiUrl || 'https://kind-rose-earthworm-hose.cyclic.app'
+import process from 'process'
+
+const apiUrl = process?.env?.APIURL
+//  || 'https://kind-rose-earthworm-hose.cyclic.app'
 
 export default apiUrl;

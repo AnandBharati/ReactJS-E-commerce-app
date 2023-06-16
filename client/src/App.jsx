@@ -9,14 +9,12 @@ import Layout from './components/Layout'
 import ImageDisplay from './pages/ImageDisplay'
 import ViewCart from './pages/ViewCart'
 import { Box, Container } from '@mui/material'
+import { useEffect } from 'react'
+import process from 'process'
 
 function App() {
 
-  useEffect(() => {
-    window.process = {
-      ...window.process,
-    };
-  }, []);
+  console.log(process.env.APIURL)
 
   return (
     <>

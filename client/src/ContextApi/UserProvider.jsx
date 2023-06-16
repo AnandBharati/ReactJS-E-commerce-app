@@ -62,7 +62,8 @@ function UserProvider({ children }) {
   const login = ({ username, password }) => {
     setIsLoading(true);
     setIsError(false);
-    setErrorMsg("")
+    setErrorMsg("");
+    console.log("apiUrl" , apiUrl)
     fetch(`${apiUrl}/auth/login`, {
       method: 'post',
       headers: {
