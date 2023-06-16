@@ -49,3 +49,31 @@ button:active{
     background-color: #2085eb;
     /* background-color: #dc143cdd; */
 }
+
+@media only screen and (max-width: 768px) {
+    .cartContainer .item{
+        width: calc(100vw - 40px);
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .cartContainer .item{
+        /* padding-top: 40px; */
+        width: calc(100vw - 40px);
+        flex-direction: column;
+        border-radius: 8px;
+    }
+
+    .cartContainer img{
+        width: 100%;
+        height: fit-content;
+        aspect-ratio: 1/1;
+        margin-right: 20px;
+        margin-bottom: 10px;
+        object-fit: cover;
+    }
+
+    .remove{
+        display: none;
+    }
+}
