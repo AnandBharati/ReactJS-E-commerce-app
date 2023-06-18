@@ -18,7 +18,8 @@ function Products() {
           justifyContent: ' center',
           width: { xs: '100vw' },
           boxShadow: '10px 0 10px 0 #0002',
-          padding: 1
+          padding: 1,
+          background: 'transparent'
         }}>
         <SearchBar />
       </Box>

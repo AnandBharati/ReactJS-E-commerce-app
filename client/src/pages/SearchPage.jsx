@@ -6,10 +6,13 @@ import { NavLink } from 'react-router-dom';
 
 function SearchPage() {
     const { searchResult } = PRODUCTS();
-    console.log({ searchResult })
+    // console.log({ searchResult })
 
     if (searchResult.length === 0) {
-        return <h1>Sorry we do not found any item</h1>
+        return <>
+            <h1 style={{textAlign:'center'}}>Sorry..!! we do not found any item</h1>
+            <NavLink to='/products'> {"<<"} Back to product page</NavLink>
+        </>
     }
 
     else {
