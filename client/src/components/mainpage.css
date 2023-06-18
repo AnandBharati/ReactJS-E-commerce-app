@@ -21,4 +21,5 @@
     flex-direction: column;
     justify-content: center;
     min-height: calc(100vh - 200px);
+    overflow-x: hidden;
 }

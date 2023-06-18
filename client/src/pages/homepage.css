@@ -54,3 +54,25 @@
     font-size: 1rem;
     padding: 10px 20px;
 }
+
+@media only screen and (max-width: 768px) {
+    .content .text-t1 {
+        font-size: 3rem;
+    }
+    
+    .content .text-t2 {
+        font-size: 1.3rem;
+    }
+    
+}
+
+@media only screen and (max-width: 375px) {
+    .content .text-t1 {
+        font-size: 2.8rem;
+    }
+    
+    .content .text-t2 {
+        font-size: 1.3rem;
+    }
+    
+}

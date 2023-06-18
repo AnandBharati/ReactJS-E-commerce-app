@@ -29,9 +29,10 @@
 }
 
 .search-container input:focus {
-    border: none;
+    border: 1px solid #1976d2;
     outline: none;
 }
+
 
 .search-container button {
     display: flex;
