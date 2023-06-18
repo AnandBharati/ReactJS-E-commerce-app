@@ -11,8 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { BsFillCartCheckFill } from 'react-icons/bs';
 import { CART } from '../ContextApi/CartProvider';
 
@@ -20,17 +19,28 @@ import logo from '../assets/logo.png'
 import { MODEL } from '../ContextApi/ModelProvider';
 import { USERS } from '../ContextApi/UserProvider';
 import SearchBar from './SearchBar';
-const pages = [['', '/products']]
+import apiUrl from '../helpers/API_URL';
+const pages = [['', '/products']];
 // const pages = [['Products', '/products'], ['Add Product', '/addnewproduct'], ];
-const settings = ['Profile', 'Account', 'Dashboard'];
+// const settings = ['Profile', 'Account', 'Dashboard'];
+const settings = [['Profile', "/user/profile"], ['Account', '/user/account'], ['Dashboard', '/user/dashboard']];
+
 
 function ResponsiveAppBar() {
+    const [categories, setCategories] = React.useState([]);
+    const navigate = useNavigate()
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const { isloggedin, setIsloggedin } = USERS()
     const { setIsSignupOpen, setIsLoginOpen } = MODEL()
+    const { userProfile, logout } = USERS()
 
     const { cart } = CART()
+
+    const logoutHandler = () => {
+        setIsLoginOpen(true);
+        logout();
+    }
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -46,6 +56,15 @@ function ResponsiveAppBar() {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+
+    React.useEffect(()=>{
+        //fetch categories
+        const url = `${apiUrl}/product/category/all`
+        fetch(url)
+        .then((res)=>res.json())
+        .then((json)=> setCategories(json.data)) //setCategories(json)
+        .catch((err)=> console.log(err))
+    }, [])
 
     return (
         <AppBar position="static" >
@@ -74,7 +93,7 @@ function ResponsiveAppBar() {
                         e-Commerce
                     </Typography>
 
-                    {/* Menus for large screens */}
+                    {/* Menus for small screens */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"
@@ -104,10 +123,10 @@ function ResponsiveAppBar() {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
-                                <NavLink to={page[1]} key={page[0]}>
+                            {categories.map((category) => (
+                                <NavLink to={category} key={category}>
                                     <MenuItem onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center">{page[0]}</Typography>
+                                        <Typography textAlign="center">{category}</Typography>
                                     </MenuItem>
                                 </NavLink>
 
@@ -119,25 +138,25 @@ function ResponsiveAppBar() {
                         </Box>
                     </Box>
 
-                    {/* responsive menus */}
+                    {/* menus display in center for large screen */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
+                        {categories.map((category) => (
                             <NavLink
-                                to={page[1]}
-                                key={page[0]}>
+                                to={category}
+                                key={category}>
                                 <Button
                                     onClick={handleCloseNavMenu}
                                     sx={{ my: 2, color: 'white', display: 'block' }}
                                 >
-                                    {page[0]}
+                                    {category}
                                 </Button>
                             </NavLink>
                         ))}
 
                         {/* Search Feature */}
                         <Box
-                            sx={{                    
-                                alignSelf:'center',                     
+                            sx={{
+                                alignSelf: 'center',
                             }}>
                             <SearchBar />
                         </Box>
@@ -159,7 +178,7 @@ function ResponsiveAppBar() {
                             <button type="button" onClick={() => setIsSignupOpen(true)}>signup</button>
                             <button type="button" onClick={() => setIsLoginOpen(true)}>login</button>
                         </> :
-                            <button type="button" onClick={() => { setIsloggedin(false); setIsLoginOpen(true) }}>logout</button>
+                            <button type="button" onClick={() => { logoutHandler() }}>logout</button>
                         }
                     </Box>
 
@@ -167,7 +186,7 @@ function ResponsiveAppBar() {
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                <Avatar alt="Remy Sharp" src={userProfile.avatar ?? "https://cdn-icons-png.flaticon.com/512/147/147142.png"} />
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -188,7 +207,7 @@ function ResponsiveAppBar() {
                         >
                             {settings.map((setting) => (
                                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
+                                    <Typography textAlign="center" onClick={() => navigate(setting[1])}>{setting[0]}</Typography>
                                 </MenuItem>
                             ))}
                             <Box sx={{ display: { xs: 'display', sm: 'none' } }}>
@@ -196,7 +215,7 @@ function ResponsiveAppBar() {
                                     <MenuItem onClick={() => { handleCloseUserMenu(); setIsSignupOpen(true) }}>Signup</MenuItem>
                                     <MenuItem onClick={() => { handleCloseUserMenu(); setIsLoginOpen(true) }}>Login</MenuItem>
                                 </> :
-                                    <MenuItem onClick={() => { handleCloseUserMenu(); setIsloggedin(false); setIsLoginOpen(true) }}>Logout</MenuItem>
+                                    <MenuItem onClick={() => { handleCloseUserMenu(); logoutHandler(); }}>Logout</MenuItem>
                                 }
                             </Box>
 

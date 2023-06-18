@@ -12,6 +12,8 @@ import { Box, Container } from '@mui/material'
 import { useEffect } from 'react'
 import { PRODUCTS } from './ContextApi/ProductProvider'
 import SearchPage from './pages/SearchPage'
+import Profile from './pages/Profile'
+import Account from './pages/Account'
 
 function App() {
   const {fetchProducts} = PRODUCTS();
@@ -34,6 +36,10 @@ function App() {
             <Route path='viewproduct/:id' element={<ViewProduct />} />
             <Route path='viewImage' element={<ImageDisplay />} />
             <Route path='viewCart' element={<ViewCart />} />
+          </Route>
+          <Route path='/user'>
+            <Route path='profile' element={<Profile/>} />
+            <Route path='account' element={<Account/>} />
           </Route>
         </Routes>
       </Box>

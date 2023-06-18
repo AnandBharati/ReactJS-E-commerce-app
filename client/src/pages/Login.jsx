@@ -19,6 +19,7 @@ function Login() {
     password: '',
   })
 
+
   //close login page if user is logged in
   useEffect(() => {
     isloggedin && setIsLoginOpen(false)

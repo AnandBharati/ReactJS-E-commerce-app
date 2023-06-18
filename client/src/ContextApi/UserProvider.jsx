@@ -9,18 +9,7 @@ export function USERS() {
 
 
 function UserProvider({ children }) {
-  const [userProfile, setUserProfile] = useState({
-    username: '',
-    email: '',
-    firstame: '',
-    lastname: '',
-    dob: '',
-    addressline1: '',
-    addressline2: '',
-    city: '',
-    country: '',
-    pincode: '',
-  });
+  const [userProfile, setUserProfile] = useState({});
   const [authInfo, setAuthInfo] = useState({})
   const [isloggedin, setIsloggedin] = useState(false);
 
@@ -41,7 +30,7 @@ function UserProvider({ children }) {
       body: JSON.stringify(user)
     }).then((res) => res.json())
       .then((json) => {
-        console.log({json})
+        console.log({ json })
         if (json.success) {
           setIsLoading(false)
           setErrorMsg("")
@@ -63,7 +52,7 @@ function UserProvider({ children }) {
     setIsLoading(true);
     setIsError(false);
     setErrorMsg("");
-    console.log("apiUrl" , apiUrl)
+    console.log("apiUrl", apiUrl)
     fetch(`${apiUrl}/auth/login`, {
       method: 'post',
       headers: {
@@ -72,8 +61,9 @@ function UserProvider({ children }) {
       body: JSON.stringify({ username, password })
     })
       .then((res) => res.json())
-      .then((result) =>{ 
+      .then((result) => {
         result.success && setIsloggedin(true)
+        result.success && setUserProfile(result.data)
         setIsLoading(false);
       })
       .catch((e) => {
@@ -81,6 +71,12 @@ function UserProvider({ children }) {
         setIsError(true);
         setErrorMsg(e.message)
       })
+  }
+
+  const logout = () => {
+    console.log('logout funtion called');
+    setIsloggedin(false);
+    setUserProfile({});
   }
 
   const updateUser = (user) => {
@@ -97,6 +93,7 @@ function UserProvider({ children }) {
     isloggedin,
     signup,
     login,
+    logout,
     setErrorMsg,
     setIsloggedin
   }

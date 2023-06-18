@@ -1,8 +1,9 @@
 .search-page{
+   
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
     flex: 1 1 100%;
     flex-wrap: wrap;
     gap: 1.5rem;

@@ -41,7 +41,7 @@ export const fetchAllCategory = async (req, res) => {
     const set = new Set();
     const result = await productModel.find()
     result && result.map((item) => set.add(item.category));
-    res.status(200).json({ categories: [...set] });
+    res.status(200).json({ status: true ,data: [...set] });
 }
 
 export const fetchSubCategory = async (req, res) => {

@@ -10,7 +10,7 @@ function SearchPage() {
 
     if (searchResult.length === 0) {
         return <>
-            <h1 style={{textAlign:'center'}}>Sorry..!! we do not found any item</h1>
+            <h1 style={{ textAlign: 'center' }}>Sorry..!! we do not found any item</h1>
             <NavLink to='/products'> {"<<"} Back to product page</NavLink>
         </>
     }
@@ -18,11 +18,13 @@ function SearchPage() {
     else {
         // { id, name, desc, price, image }
         return <div className='search-page'>
-            {searchResult.map(item => {
-                const { id, name, desc, price, image } = item;
-                return <ProductCard key={id} data={{ id, name, desc, price, image }} />
-            }
-            )}
+            <div className="cards">
+                {searchResult.map(item => {
+                    const { id, name, desc, price, image } = item;
+                    return <ProductCard key={id} data={{ id, name, desc, price, image }} />
+                }
+                )}
+            </div>
             <NavLink to='/products'> {"<<"} Back to product page</NavLink>
         </div>
     }
