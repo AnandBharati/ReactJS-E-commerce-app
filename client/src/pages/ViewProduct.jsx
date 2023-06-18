@@ -22,18 +22,16 @@ function ViewProduct() {
     setCartDetail(cart.filter((p) => p?.id === id))
   },[cart])
 
-
   return (
     <div className='view-product'>
-      <img src={item.image} alt="product image" />
-
+      <img src={item?.image ?? "https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"} alt="product image" />
       <div className="product-detail">
-        <h2>{item.id}</h2>
-        <p>name - {item.name}</p>
-        <p>desc - {item.desc}</p>
-        <p>Seller - {item.seller}</p>
-        <p>Manifactured By - {item.manifacturedBy}</p>
-        <h3>Price: ₹{item.price.toLocaleString()}</h3>
+        <h2>{item?.id}</h2>
+        <p>name - {item?.name}</p>
+        <p>desc - {item?.desc}</p>
+        <p>Seller - {item?.seller}</p>
+        <p>Manifactured By - {item?.manifacturedBy}</p>
+        <h3>Price: ₹{item?.price.toLocaleString()}</h3>
 
         {cartDetail.length > 0 ?
           <div className="btns" style={{ display: 'flex' }}>

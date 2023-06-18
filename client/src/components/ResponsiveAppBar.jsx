@@ -19,7 +19,8 @@ import { CART } from '../ContextApi/CartProvider';
 import logo from '../assets/logo.png'
 import { MODEL } from '../ContextApi/ModelProvider';
 import { USERS } from '../ContextApi/UserProvider';
-const pages = [['Explore', '/products']]
+import SearchBar from './SearchBar';
+const pages = [['', '/products']]
 // const pages = [['Products', '/products'], ['Add Product', '/addnewproduct'], ];
 const settings = ['Profile', 'Account', 'Dashboard'];
 
@@ -50,11 +51,11 @@ function ResponsiveAppBar() {
         <AppBar position="static" >
             <Container maxWidth={'xl'}>
                 <Toolbar disableGutters style={{ height: '50px' }} >
+                    {/*Logo for large screen*/}
                     <Box sx={{ display: { xs: 'none', md: 'block' } }}>
                         <img src={logo} height='50px' />
                     </Box>
-
-                    {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+                    {/* Title of website */}
                     <Typography
                         variant="h6"
                         noWrap
@@ -73,7 +74,7 @@ function ResponsiveAppBar() {
                         e-Commerce
                     </Typography>
 
-
+                    {/* Menus for large screens */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"
@@ -112,12 +113,13 @@ function ResponsiveAppBar() {
 
                             ))}
                         </Menu>
+                        {/* logo for small screen size */}
                         <Box sx={{ display: { xs: 'block', md: 'none' }, justifySelf: 'start' }}>
                             <img src={logo} height='50px' />
                         </Box>
                     </Box>
 
-
+                    {/* responsive menus */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
                             <NavLink
@@ -132,7 +134,15 @@ function ResponsiveAppBar() {
                             </NavLink>
                         ))}
 
+                        {/* Search Feature */}
+                        <Box
+                            sx={{                    
+                                alignSelf:'center',                     
+                            }}>
+                            <SearchBar />
+                        </Box>
                     </Box>
+
 
 
                     {/* cart */}

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ProductContext } from './ProductContext'
 import apiUrl from '../helpers/API_URL'
+import { useNavigate } from 'react-router-dom';
 
 
 export function PRODUCTS() {
@@ -9,33 +10,51 @@ export function PRODUCTS() {
 }
 
 function ProductProvider(props) {
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState([]);
+    const [searchResult, setSearchResults] = useState([]);
+    const navigate = useNavigate()
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchProducts()
     }, [])
 
-    function fetchProducts(){
+    function fetchProducts() {
         fetch(`${apiUrl}/product/all`)
-        .then((res)=>res.json())
-        .then((result)=> setProducts(result))
+            .then((res) => res.json())
+            .then((result) => setProducts(result))
     }
 
     function addProduct(item) {
         setProducts([...products, item]);
-        fetch(`${apiUrl}/product/add`,{
+        fetch(`${apiUrl}/product/add`, {
             method: 'POST',
-            headers:{
+            headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(item)
-        }).then((res)=>res.json())
-        .then((result)=> console.log(result))
-        .catch((error)=> console.log('error which fetch operation', error))
+        }).then((res) => res.json())
+            .then((result) => console.log(result))
+            .catch((error) => console.log('error which fetch operation', error))
+    }
+
+    function searchProduct(keyword) {
+        if (keyword) {
+            fetch(`${apiUrl}/product/search/` + keyword)
+                .then((res) => res.json())
+                .then((result) => {
+                    console.log({result})
+                    setSearchResults(result);
+                    //redirect to search page
+                    navigate('/search');
+                })
+                .catch((error)=>{
+                    alert('something when wrong please try later')
+                })
+        }
     }
 
     return (
-        <ProductContext.Provider value={{ products, setProducts, addProduct, fetchProducts }}>
+        <ProductContext.Provider value={{ products, searchResult, setProducts, addProduct, fetchProducts, searchProduct }}>
             {props.children}
         </ProductContext.Provider>
     )
