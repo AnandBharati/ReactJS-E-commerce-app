@@ -12,10 +12,19 @@ function Products() {
   useEffect(() => {
     fetchNextPage();
     window.scrollTo(0, 0);
+    console.log(currPage)
   }, [currPage])
 
   function fetchNextPage() {
     currPage <= totalPages && fetchProducts(currPage);
+  }
+
+  function incPage(by = 1) {
+    currPage < totalPages && setCurrPage(currPage + by)
+  }
+
+  function decPage(by = 1) {
+    currPage => 0 && setCurrPage(currPage - by)
   }
 
   return (
@@ -46,15 +55,15 @@ function Products() {
         </div>
 
         <div className="pagination">
-          <button type='button' onClick={() => currPage > 0 && setCurrPage(currPage - 1)} >Prev</button>
-          {currPage - 3 > 0 && <button value={currPage - 3} onClick={(e) => setCurrPage(currPage - 3)}>{currPage - 3}</button>}
-          {currPage - 2 > 0 && <button value={currPage - 2} onClick={(e) => setCurrPage(currPage - 2)}>{currPage - 2}</button>}
-          {currPage - 1 > 0 && <button value={currPage - 1} onClick={(e) => setCurrPage(currPage - 1)}>{currPage - 1}</button>}
+          <button type='button' onClick={() => decPage()} >Prev</button>
+          {currPage - 3 > 0 && <button value={currPage - 3} onClick={(e) => decPage(3)}>{currPage - 3}</button>}
+          {currPage - 2 > 0 && <button value={currPage - 2} onClick={(e) => decPage(2)}>{currPage - 2}</button>}
+          {currPage - 1 > 0 && <button value={currPage - 1} onClick={(e) => decPage(1)}>{currPage - 1}</button>}
           {currPage > 0 && <button value={currPage} className='currpage'>{currPage}</button>}
-          {currPage + 1 <= totalPages && <button value={currPage + 1} onClick={(e) => setCurrPage(currPage + 1)}>{currPage + 1}</button>}
-          {currPage + 2 <= totalPages && <button value={currPage + 2} onClick={(e) => setCurrPage(currPage + 2)}>{currPage + 2}</button>}
-          {currPage + 3 <= totalPages && <button value={currPage + 3} onClick={(e) => setCurrPage(currPage + 3)}>{currPage + 3}</button>}
-          <button type='button' onClick={() => currPage > 0 && setCurrPage(currPage + 1)} >Next</button>
+          {currPage + 1 < totalPages && <button value={currPage + 1} onClick={(e) => incPage(1)}>{currPage + 1}</button>}
+          {currPage + 2 < totalPages && <button value={currPage + 2} onClick={(e) => incPage(2)}>{currPage + 2}</button>}
+          {currPage + 3 < totalPages && <button value={currPage + 3} onClick={(e) => incPage(3)}>{currPage + 3}</button>}
+          <button type='button' onClick={() => incPage()} >Next</button>
         </div>
 
       </div >
