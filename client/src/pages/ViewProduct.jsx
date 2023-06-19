@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 import { PRODUCTS } from '../ContextApi/ProductProvider'
 import './ViewProduct.css'
 import { CART } from '../ContextApi/CartProvider'
@@ -13,37 +13,44 @@ function ViewProduct() {
   const [cartDetail, setCartDetail] = useState(cart.filter((p) => p?.id === id))
   const [item, setItem] = useState(products.find(prod => prod.id == id))
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
 
   useEffect(() => {
     setItem(products.find(prod => prod.id == id))
   }, [products])
 
-  useEffect(()=>{
+  useEffect(() => {
     setCartDetail(cart.filter((p) => p?.id === id))
-  },[cart])
+  }, [cart])
 
   return (
-    <div className='view-product'>
-      <img src={item?.image ?? "https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"} alt="product image" />
-      <div className="product-detail">
-        <h2>{item?.id}</h2>
-        <p>name - {item?.name}</p>
-        <p>desc - {item?.desc}</p>
-        <p>Seller - {item?.seller}</p>
-        <p>Manifactured By - {item?.manifacturedBy}</p>
-        <h3>Price: ₹{item?.price.toLocaleString()}</h3>
+    <>
+      <div className='view-product'>
+        <img src={item?.image ?? "https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"} alt="product image" />
+        <div className="product-detail">
+          <h2>{item?.id}</h2>
+          <p>name - {item?.name}</p>
+          <p>desc - {item?.desc}</p>
+          <p>Seller - {item?.seller}</p>
+          <p>Manifactured By - {item?.manifacturedBy}</p>
+          <h3>Price: ₹{item?.price.toLocaleString()}</h3>
 
-        {cartDetail.length > 0 ?
-          <div className="btns" style={{ display: 'flex' }}>
-            <button onClick={() => DecQty(id)}>-</button>
-            <input type="text" readOnly value={cartDetail[0].qty} />
-            <button onClick={() => IncQty(id)}>+</button>
-          </div>
-          :
-          <button className='btnAddtocart' type='button' onClick={() => { addToCart(id) }}>add to Cart</button>
-        }
+          {cartDetail.length > 0 ?
+            <div className="btns" style={{ display: 'flex' }}>
+              <button onClick={() => DecQty(id)}>-</button>
+              <input type="text" readOnly value={cartDetail[0].qty} />
+              <button onClick={() => IncQty(id)}>+</button>
+            </div>
+            :
+            <button className='btnAddtocart' type='button' onClick={() => { addToCart(id) }}>add to Cart</button>
+          }
+        </div>
       </div>
-    </div>
+      <NavLink to="/products">{'<< back to product page'}</NavLink>
+    </>
+
 
   )
 }

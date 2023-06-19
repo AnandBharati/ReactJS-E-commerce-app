@@ -25,7 +25,8 @@ function ViewCart() {
                                 <input type="text" readOnly value={item.qty} />
                                 <button onClick={() => IncQty(item.id)}>+</button>
                             </div>
-                            <p>price: ₹{item.totalprice.toLocaleString()} </p>
+                            <p>unit price: ₹{item.unitprice.toLocaleString()} </p>
+                            <b>total price: ₹{item.totalprice.toLocaleString()} </b>
                         </div>
                         <div className="remove" onClick={() => removeFromCart(item.id)}>
                             <IconContext.Provider value={{ style: { verticalAlign: 'middle', fontSize: '25px' } }}>

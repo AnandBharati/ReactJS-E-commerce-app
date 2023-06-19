@@ -19,7 +19,7 @@ function App() {
   const {fetchProducts} = PRODUCTS();
 
   useEffect(()=>{
-    fetchProducts()
+    fetchProducts(0,30)
 }, [])
 
   return (

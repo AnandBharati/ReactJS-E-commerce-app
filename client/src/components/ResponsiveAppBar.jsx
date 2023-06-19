@@ -140,7 +140,7 @@ function ResponsiveAppBar() {
 
                     {/* menus display in center for large screen */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {categories.map((category) => (
+                        {/* {categories.map((category) => (
                             <NavLink
                                 to={category}
                                 key={category}>
@@ -151,7 +151,7 @@ function ResponsiveAppBar() {
                                     {category}
                                 </Button>
                             </NavLink>
-                        ))}
+                        ))} */}
 
                         {/* Search Feature */}
                         <Box

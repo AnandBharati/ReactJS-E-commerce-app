@@ -17,8 +17,7 @@ function CartProvider({ children }) {
     useEffect(() => {
         const localCartValue = localStorage.getItem('cart')
         localCartValue && setCart(JSON.parse(localCartValue));
-        console.log(localCartValue)
-        
+        // console.log(localCartValue)
     },[])
 
     useEffect(() => {

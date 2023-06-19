@@ -1,4 +1,4 @@
-import {productModel} from '../schema/products.js'
+import { productModel } from '../schema/products.js'
 
 export const addProduct = async (req, res) => {
     const { id, name, desc, image, category, subcategory, price, seller, manifacturedBy } = req.body
@@ -31,6 +31,22 @@ export const fetchAllproduct = async (req, res) => {
     }
 }
 
+export const fetchProductPaginated = async (req, res, next) => {
+    const skip = req.query.skip;
+    const limit = req.query.limit;
+    if (skip && limit) {
+        try {
+            const count = await productModel.countDocuments();
+            const result = await productModel.find({}, {}, { skip, limit });
+            return res.status(200).json({success: true, data: result, totalpages: Math.ceil(count / limit)});
+        } catch (err) {
+            next(err)
+        }
+    }
+    else
+        fetchAllproduct(req, res); //fetch all the product
+}
+
 export const fetchProductsByCategory = async (req, res) => {
     // const result = await productModel.find({})
     const result = await productModel.find({ 'category': req.params.category })
@@ -41,7 +57,7 @@ export const fetchAllCategory = async (req, res) => {
     const set = new Set();
     const result = await productModel.find()
     result && result.map((item) => set.add(item.category));
-    res.status(200).json({ status: true ,data: [...set] });
+    res.status(200).json({ status: true, data: [...set] });
 }
 
 export const fetchSubCategory = async (req, res) => {
