@@ -20,7 +20,7 @@ function ProductProvider(props) {
     }, [])
 
     function fetchProducts(skip=0, limit=30) {
-        fetch(`http://localhost:2000/product/?skip=${skip}&limit=${limit}`)
+        fetch(`${apiUrl}/product/?skip=${skip}&limit=${limit}`)
             .then((res) => res.json())
             .then((json) => {
                 setProducts(json.data);
