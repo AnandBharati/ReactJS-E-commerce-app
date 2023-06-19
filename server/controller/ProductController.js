@@ -32,19 +32,17 @@ export const fetchAllproduct = async (req, res) => {
 }
 
 export const fetchProductPaginated = async (req, res, next) => {
-    const skip = req.query.skip;
-    const limit = req.query.limit;
-    if (skip && limit) {
-        try {
-            const count = await productModel.countDocuments();
-            const result = await productModel.find({}, {}, { skip, limit });
-            return res.status(200).json({success: true, data: result, totalpages: Math.ceil(count / limit)});
-        } catch (err) {
-            next(err)
-        }
+    let skip = req.query.skip || 0;
+    const limit = req.query.limit || 10;
+    skip = parseInt(skip) * parseInt(limit);
+
+    try {
+        const count = await productModel.countDocuments();
+        const result = await productModel.find({}, {}, { skip, limit, sort: { id: 'asc' } });
+        return res.status(200).json({ success: true, data: result, totalpages: Math.ceil(count / limit) });
+    } catch (err) {
+        next(err)
     }
-    else
-        fetchAllproduct(req, res); //fetch all the product
 }
 
 export const fetchProductsByCategory = async (req, res) => {
