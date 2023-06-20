@@ -31,7 +31,7 @@ function App() {
             <Route index element={<Homepage />} />
             {/* <Route index element={<Products />} /> */}
             <Route path='products' element={<Products />} />
-            <Route path='search' element={<SearchPage />} />
+            <Route path='search/:keyword' element={<SearchPage />} />
             <Route path='addnewproduct' element={<AddNewProduct />} />
             <Route path='viewproduct/:id' element={<ViewProduct />} />
             <Route path='viewImage' element={<ImageDisplay />} />

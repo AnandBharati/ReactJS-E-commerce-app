@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { PRODUCTS } from '../ContextApi/ProductProvider'
 import ProductCard from '../components/ProductCard';
 import './searchpage.css'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
 function SearchPage() {
-    const { searchResult } = PRODUCTS();
+    const {keyword} = useParams();
+    const { searchResult  } = PRODUCTS();
     // console.log({ searchResult })
+
 
     if (searchResult.length === 0) {
         return <>
@@ -18,6 +20,7 @@ function SearchPage() {
     else {
         // { id, name, desc, price, image }
         return <div className='search-page'>
+            <h2>Result for {keyword}</h2>
             <div className="cards">
                 {searchResult.map(item => {
                     const { id, name, desc, price, image } = item;

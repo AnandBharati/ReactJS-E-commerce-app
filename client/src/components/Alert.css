@@ -1,0 +1,31 @@
+.alert-container{
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    z-index: 2001;
+    opacity: 0;
+}
+
+.alert{
+    color: black;
+    font-weight: 500;
+    padding: .8rem 2rem;
+    box-shadow: 5px 5px 20px -10px black;
+}
+
+
+.alert-container.active{
+    animation: slideright .5s forwards;
+}
+
+
+@keyframes slideright{
+    0%{
+        opacity: 0;
+        transform: translateX(-2rem);
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

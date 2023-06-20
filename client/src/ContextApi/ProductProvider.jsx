@@ -55,7 +55,7 @@ function ProductProvider(props) {
                     console.log({ result })
                     setSearchResults(result);
                     //redirect to search page
-                    navigate('/search');
+                    navigate(`/search/${keyword}`);
                 })
                 .catch((error) => {
                     alert('something when wrong please try later')
@@ -69,10 +69,9 @@ function ProductProvider(props) {
                 .then(res => res.json())
                 .then(json=> {
                     setSearchResults(json.data);
-                    console.log(json.data)
-                    navigate('/search')
+                    navigate(`/search/${keyword}`);
                 })
-                .catch((err)=> err);
+                .catch((err)=> console.log(err));
        
     }
 
