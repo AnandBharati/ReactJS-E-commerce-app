@@ -48,7 +48,7 @@ export const fetchProductPaginated = async (req, res, next) => {
 export const fetchProductsByCategory = async (req, res) => {
     // const result = await productModel.find({})
     const result = await productModel.find({ 'category': req.params.category })
-    res.status(200).json(result);
+    res.status(200).json({success: true, data: result});
 }
 
 export const fetchAllCategory = async (req, res) => {

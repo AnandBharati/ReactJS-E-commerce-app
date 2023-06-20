@@ -20,6 +20,8 @@ import { MODEL } from '../ContextApi/ModelProvider';
 import { USERS } from '../ContextApi/UserProvider';
 import SearchBar from './SearchBar';
 import apiUrl from '../helpers/API_URL';
+import { PRODUCTS } from '../ContextApi/ProductProvider';
+
 const pages = [['', '/products']];
 // const pages = [['Products', '/products'], ['Add Product', '/addnewproduct'], ];
 // const settings = ['Profile', 'Account', 'Dashboard'];
@@ -31,9 +33,9 @@ function ResponsiveAppBar() {
     const navigate = useNavigate()
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const { isloggedin, setIsloggedin } = USERS()
+    const { isloggedin,  userProfile, logout} = USERS()
     const { setIsSignupOpen, setIsLoginOpen } = MODEL()
-    const { userProfile, logout } = USERS()
+    const {searchProductByCategory} = PRODUCTS()
 
     const { cart } = CART()
 
@@ -124,11 +126,11 @@ function ResponsiveAppBar() {
                             }}
                         >
                             {categories.map((category) => (
-                                <NavLink to={category} key={category}>
-                                    <MenuItem onClick={handleCloseNavMenu}>
+                                // <NavLink to={category} key={category}>
+                                    <MenuItem onClick={()=>{handleCloseNavMenu(); searchProductByCategory(category) }}>
                                         <Typography textAlign="center">{category}</Typography>
                                     </MenuItem>
-                                </NavLink>
+                                // </NavLink>
 
                             ))}
                         </Menu>

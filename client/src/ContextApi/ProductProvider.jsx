@@ -16,10 +16,10 @@ function ProductProvider(props) {
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetchProducts(0, 30)
+        fetchProducts(0, 30);
     }, [])
 
-    function fetchProducts(skip=0, limit=30) {
+    function fetchProducts(skip = 0, limit = 30) {
         fetch(`${apiUrl}/product/?skip=${skip}&limit=${limit}`)
             .then((res) => res.json())
             .then((json) => {
@@ -63,8 +63,21 @@ function ProductProvider(props) {
         }
     }
 
+    function searchProductByCategory(keyword) {
+        
+            fetch(`${apiUrl}/product/bycategory/${keyword}`)
+                .then(res => res.json())
+                .then(json=> {
+                    setSearchResults(json.data);
+                    console.log(json.data)
+                    navigate('/search')
+                })
+                .catch((err)=> err);
+       
+    }
+
     return (
-        <ProductContext.Provider value={{ products, searchResult, totalPages, setProducts, addProduct, fetchProducts, searchProduct }}>
+        <ProductContext.Provider value={{ products, searchResult, totalPages, setProducts, addProduct, fetchProducts, searchProduct, searchProductByCategory }}>
             {props.children}
         </ProductContext.Provider>
     )
