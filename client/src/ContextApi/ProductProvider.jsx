@@ -12,29 +12,37 @@ export function PRODUCTS() {
 function ProductProvider(props) {
     const [products, setProducts] = useState([]);
     const [searchResult, setSearchResults] = useState([]);
-    const [totalPages, setTotalPages] = useState(0)
-    const navigate = useNavigate()
+    const [totalPages, setTotalPages] = useState(0);
+    const navigate = useNavigate();
+    const [isProdLoading, setIsProdLoading] = useState(false);
 
     useEffect(() => {
         fetchProducts(0, 30);
     }, [])
 
     function fetchProducts(skip = 0, limit = 30) {
+        setIsProdLoading(true)
         fetch(`${apiUrl}/product/?skip=${skip}&limit=${limit}`)
             .then((res) => res.json())
             .then((json) => {
                 setProducts(json.data);
                 setTotalPages(json.totalpages);
+                setIsProdLoading(false);
             });
     }
 
     function fetchAllProducts() {
+        setIsProdLoading(true)
         fetch(`${apiUrl}/product/all`)
             .then((res) => res.json())
-            .then((result) => setProducts(result))
+            .then((result) => {
+                setProducts(result)
+                setIsProdLoading(false)
+            })
     }
 
     function addProduct(item) {
+        setIsProdLoading(true)
         setProducts([...products, item]);
         fetch(`${apiUrl}/product/add`, {
             method: 'POST',
@@ -43,11 +51,14 @@ function ProductProvider(props) {
             },
             body: JSON.stringify(item)
         }).then((res) => res.json())
-            .then((result) => console.log(result))
+            .then((result) => {
+                setIsProdLoading(false)
+            })
             .catch((error) => console.log('error which fetch operation', error))
     }
 
     function searchProduct(keyword) {
+        setIsProdLoading(true)
         if (keyword) {
             fetch(`${apiUrl}/product/search/` + keyword)
                 .then((res) => res.json())
@@ -55,6 +66,7 @@ function ProductProvider(props) {
                     console.log({ result })
                     setSearchResults(result);
                     //redirect to search page
+                    setIsProdLoading(false)
                     navigate(`/search/${keyword}`);
                 })
                 .catch((error) => {
@@ -64,19 +76,20 @@ function ProductProvider(props) {
     }
 
     function searchProductByCategory(keyword) {
-        
-            fetch(`${apiUrl}/product/bycategory/${keyword}`)
-                .then(res => res.json())
-                .then(json=> {
-                    setSearchResults(json.data);
-                    navigate(`/search/${keyword}`);
-                })
-                .catch((err)=> console.log(err));
-       
+        setIsProdLoading(true)
+        fetch(`${apiUrl}/product/bycategory/${keyword}`)
+            .then(res => res.json())
+            .then(json => {
+                setSearchResults(json.data);
+                navigate(`/search/${keyword}`);
+                setIsProdLoading(false)
+            })
+            .catch((err) => console.log(err));
+
     }
 
     return (
-        <ProductContext.Provider value={{ products, searchResult, totalPages, setProducts, addProduct, fetchProducts, searchProduct, searchProductByCategory }}>
+        <ProductContext.Provider value={{ products, searchResult, totalPages, isProdLoading, setProducts, addProduct, fetchProducts, searchProduct, searchProductByCategory }}>
             {props.children}
         </ProductContext.Provider>
     )

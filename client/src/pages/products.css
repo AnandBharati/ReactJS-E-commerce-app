@@ -127,6 +127,35 @@ button {
     background-color: lightcoral;
 }
 
+.loader{
+    background-color: #111e;
+    /* position: fixed; */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.loader .spinner{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #fff;
+    border: 10px solid transparent;
+    border-bottom: 10px solid crimson;
+    animation: animate-spinner .5s ease-in-out infinite ;
+}
+
+@keyframes animate-spinner{
+    to{
+        rotate: 1turn;
+    }
+}
+
 @media only screen and (max-width: 768px) {
     .cards {        
         /* padding: 10px 10px; */

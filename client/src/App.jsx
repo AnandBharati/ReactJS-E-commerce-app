@@ -16,11 +16,11 @@ import Profile from './pages/Profile'
 import Account from './pages/Account'
 
 function App() {
-  const {fetchProducts} = PRODUCTS();
+  const { fetchProducts } = PRODUCTS();
 
-  useEffect(()=>{
-    fetchProducts(0,30)
-}, [])
+  // useEffect(() => {
+  //   fetchProducts(0, 30)
+  // }, [])
 
   return (
     <>
@@ -38,8 +38,8 @@ function App() {
             <Route path='viewCart' element={<ViewCart />} />
           </Route>
           <Route path='/user'>
-            <Route path='profile' element={<Profile/>} />
-            <Route path='account' element={<Account/>} />
+            <Route path='profile' element={<Profile />} />
+            <Route path='account' element={<Account />} />
           </Route>
         </Routes>
       </Box>

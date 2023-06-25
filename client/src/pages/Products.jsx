@@ -6,7 +6,7 @@ import SearchBar from '../components/SearchBar';
 import { Box } from '@mui/material';
 
 function Products() {
-  const { products, fetchProducts, totalPages } = PRODUCTS();
+  const { products, fetchProducts, totalPages, isProdLoading } = PRODUCTS();
   const [currPage, setCurrPage] = useState(1);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ function Products() {
   }, [currPage])
 
   function fetchNextPage() {
-    currPage <= totalPages && fetchProducts(currPage);
+    currPage <= totalPages && fetchProducts(currPage-1);
   }
 
   function incPage(by = 1) {
@@ -24,11 +24,13 @@ function Products() {
   }
 
   function decPage(by = 1) {
-    currPage => 0 && setCurrPage(currPage - by)
+    currPage >= 0 && setCurrPage(currPage - by)
   }
 
   return (
     <>
+      {isProdLoading && <div className="loader"><span className='spinner'></span></div>}
+
       {/* Search Feature */}
       <Box
         sx={{
@@ -51,18 +53,14 @@ function Products() {
         </div>
 
         <div className="pagination">
-
-        </div>
-
-        <div className="pagination">
           <button type='button' onClick={() => decPage()} >Prev</button>
           {currPage - 3 > 0 && <button value={currPage - 3} onClick={(e) => decPage(3)}>{currPage - 3}</button>}
           {currPage - 2 > 0 && <button value={currPage - 2} onClick={(e) => decPage(2)}>{currPage - 2}</button>}
           {currPage - 1 > 0 && <button value={currPage - 1} onClick={(e) => decPage(1)}>{currPage - 1}</button>}
           {currPage > 0 && <button value={currPage} className='currpage'>{currPage}</button>}
-          {currPage + 1 < totalPages && <button value={currPage + 1} onClick={(e) => incPage(1)}>{currPage + 1}</button>}
-          {currPage + 2 < totalPages && <button value={currPage + 2} onClick={(e) => incPage(2)}>{currPage + 2}</button>}
-          {currPage + 3 < totalPages && <button value={currPage + 3} onClick={(e) => incPage(3)}>{currPage + 3}</button>}
+          {currPage + 1 <= totalPages && <button value={currPage + 1} onClick={(e) => incPage(1)}>{currPage + 1}</button>}
+          {currPage + 2 <= totalPages && <button value={currPage + 2} onClick={(e) => incPage(2)}>{currPage + 2}</button>}
+          {currPage + 3 <= totalPages && <button value={currPage + 3} onClick={(e) => incPage(3)}>{currPage + 3}</button>}
           <button type='button' onClick={() => incPage()} >Next</button>
         </div>
 
