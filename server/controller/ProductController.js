@@ -74,8 +74,9 @@ export const fetchProductById = async (req, res) => {
 export const searchProduct = async (req, res) => {
     const keyword = req.params.keyword.toUpperCase();
     const result = await productModel.find({})
-    const filtered = result.filter((item) =>
-        item.name.toUpperCase().search(keyword) >= 0 || item.desc.toUpperCase().search(keyword) >= 0)
+    const filtered = result.filter((item) =>{
+       return (item.name.toUpperCase().search(keyword) >= 0 || item.desc.toUpperCase().search(keyword) >= 0)
+    })
     console.log(filtered)
     res.status(200).json(filtered)
 }
