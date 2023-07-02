@@ -48,7 +48,7 @@ export const fetchProductPaginated = async (req, res, next) => {
 export const fetchProductsByCategory = async (req, res) => {
     // const result = await productModel.find({})
     const result = await productModel.find({ 'category': req.params.category })
-    res.status(200).json({success: true, data: result});
+    res.status(200).json({ success: true, data: result });
 }
 
 export const fetchAllCategory = async (req, res) => {
@@ -74,6 +74,7 @@ export const fetchProductById = async (req, res) => {
 export const searchProduct = async (req, res) => {
     const keyword = req.params.keyword.toUpperCase();
     const result = await productModel.find({})
-    const filtered = result.filter((item) => item.name.toUpperCase().search(keyword) >= 0)
+    const filtered = result.filter((item) =>
+        item.name.toUpperCase().search(keyword) >= 0 || item.desc.toUpperCase().search(keyword) >= 0)
     res.status(200).json(filtered)
 }
